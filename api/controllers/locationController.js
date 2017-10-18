@@ -4,7 +4,7 @@
 
 const admin = require("firebase-admin");
 //Keystore
-const serviceAccount = require("../../config/serviceAccountKey.json");
+const serviceAccount = require("../../../serviceAccountKey.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://where-am-i-9a782.firebaseio.com"
