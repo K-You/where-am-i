@@ -1,3 +1,32 @@
+Where Am I ? 
+Oneshot 18/10/17
+
+Node - Firebase - MapsAPI 
+
+-> npm run start
+
+(To run this project, a private key is needed (not uploaded on this repo))
+
+Endpoints : 
+`GET /?session\_id={session\_id} ` --> Map displaying the last known location of the user identified by {session\_id}
+`GET /locations/{session\_id} ` --> Returns the locations informations of the user identified by {session\_id}
+
+
+`POST /locations/{session\_id} ` --> Adds a new location for the user identified by {session\_id}
+
+Ex : 
+url -H "Content-Type: application/json" -d '{"lat":48.866667,"lng":2.333333, "color":"blue"}' http://localhost:3000/locations/1 
+
+
+Architecture : 
+
+server.js -> app root
+api/routes/locationsRoutes.js -> defines locations/:session\_id routes (GET & POST)
+api/controllers/locationsController.js -> Contains the post & get logic
+index.html -> Html file displaying the map & containing the logic to directly get firebase informations (the logic here is a sin of the oneshot process)
+
+
+Martin D.A. : 
 
 Il s'agit de développer un service minimal de partage de position, basé sur Firebase.
 
