@@ -1,0 +1,29 @@
+{
+  "name": "where-am-i",
+  "version": "1.0.0",
+  "description": "Minimal position sharing service based on Firebase",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "firebase": "^4.5.2",
+    "firebase-admin": "^5.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/K-You/where-am-i.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/K-You/where-am-i/issues"
+  },
+  "homepage": "https://github.com/K-You/where-am-i#readme"
+}

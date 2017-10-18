@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Where am I</title>
+
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="map"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      let config = {
+        apiKey: "AIzaSyCj-O6gCwp0o_m3MAwDdZbEaLZ9xpa-y-c",
+        authDomain: "where-am-i-9a782.firebaseapp.com",
+        databaseURL: "https://where-am-i-9a782.firebaseio.com",
+        projectId: "where-am-i-9a782",
+        storageBucket: "where-am-i-9a782.appspot.com",
+        messagingSenderId: "784928777604"
+      };
+      firebase.initializeApp(config);
+
+      //Initializing Google Map
+      function initMap() {
+
+        var paris = {lat: 48.866667, lng: 2.333333};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: paris
+        });
+
+        initFirebase(map);
+      }
+
+
+     function initFirebase(map){
+
+        let session_id = getParameterByName("session_id");
+        console.log(session_id);
+        const database = firebase.database();
+        let ref = database.ref("locations/" + session_id);
+
+        //Creating the event listener on firebase changing values
+        ref.on("value", function(snapshot) {
+          processValue(snapshot.val());
+        }, function(errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+
+
+        //Subfunction processing the returned value & setting the markers
+        let marker = undefined;
+        function processValue(data){
+          if(marker!=undefined){
+            marker.setMap(null);
+          }
+          marker = new google.maps.Marker({
+            position: {lat: parseFloat(data.lat), lng: parseFloat(data.lng)},
+            map: map
+          });
+          switch(data.color){
+            case "green":
+              marker.setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+              break;
+            case "blue":
+              marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+              break;
+            default:
+              marker.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+          }
+        }
+
+      }
+
+
+
+      //Utility function to retrieve the session_id from the query params.
+      function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj-O6gCwp0o_m3MAwDdZbEaLZ9xpa-y-c&callback=initMap">
+    </script>
+  </body>
+</html>
+
