@@ -1,22 +1,10 @@
-let pos = [{
-  lat: 4.32232,
-  lon: 5.23343,
-  session_id: 1,
-  color: "red"
-}, {
-  lat: 4.32232,
-  lon: 5.23343,
-  session_id: 2,
-  color: "green"
-}, ]
-
-
 /**
  * Firebase
  */
 
 const admin = require("firebase-admin");
-const serviceAccount = require("../../../serviceAccountKey.json");
+//Keystore
+const serviceAccount = require("../../config/serviceAccountKey.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://where-am-i-9a782.firebaseio.com"
