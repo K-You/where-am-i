@@ -1,14 +1,14 @@
-#Where Am I ? 
+# Where Am I ? 
 
 Oneshot 18/10/17
 
-##Node - Firebase - MapsAPI 
+## Node - Firebase - MapsAPI 
 
 -> npm run start
 
 *To run this project, a private key is needed : `config/serviceAccountKey.json`*
 
-##Docker : 
+## Docker : 
 *Here you also will need to add `config/serviceAccountKey.json`*
 
 `docker build -t <your-id>/where-am-i`
@@ -16,7 +16,7 @@ Oneshot 18/10/17
 
 `docker run -p 3000:3000 -d <image-id>`
 
-##Endpoints : 
+## Endpoints : 
 
 `GET /?session\_id={session\_id} ` --> Map displaying the last known location of the user identified by {session\_id}
 
@@ -35,7 +35,7 @@ On a terminal, run the following curl command:
 
 *Note that as this example calls the firebase data, the marker may already be located on this spot for the `session_id=1`.*
 
-##Architecture : 
+## Architecture : 
 
 server.js -> app root
 
